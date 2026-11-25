@@ -1,4 +1,4 @@
-# Laravel POS -- TFA7 Activity
+# Laravel POS -- TFA8 Activity
 
 A Laravel-based Point of Sale (POS) project extended for the TFA7
 activity: **Forms, Validation, and File Upload**.
