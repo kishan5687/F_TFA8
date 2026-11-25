@@ -25,12 +25,6 @@ validation, profile editing, and avatar uploads.
     -   Save the avatar file path in the database.
 -   Validation feedback for submitted forms.
 
-> **Activity requirement to verify:** The assignment also requires
-> creating a display-ready processed avatar/thumbnail using an
-> instructor-approved image package. Confirm that image processing has
-> been implemented before treating this requirement as complete. The
-> current basic upload implementation stores the uploaded image file.
-
 ## Requirements
 
 Install the following before running the project:
@@ -42,32 +36,6 @@ Install the following before running the project:
 -   Node.js and npm
 -   A web browser
 
-For a local Windows setup, XAMPP can provide PHP and MySQL.
-
-## Installation
-
-### 1. Clone or download the project
-
-Clone the repository:
-
-``` bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-```
-
-Go into the project directory:
-
-``` bash
-cd YOUR_PROJECT_FOLDER
-```
-
-If you downloaded the project as a ZIP file, extract it and open the
-extracted folder in your terminal.
-
-### 2. Install PHP dependencies
-
-``` bash
-composer install
-```
 
 ### 3. Create the environment file
 
