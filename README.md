@@ -1,277 +1,221 @@
-# Laravel Student Lab
+# Laravel POS -- TFA7 Activity
 
-A Laravel web application for managing customer records and user accounts. This project was developed for the IT0049 Web System Technologies activity using Laravel, PHP, and MySQL.
+A Laravel-based Point of Sale (POS) project extended for the TFA7
+activity: **Forms, Validation, and File Upload**.
 
-## Project Information
-
-- **Framework:** Laravel 12
-- **PHP:** 8.2
-- **Database:** MySQL
-- **Local development environment:** XAMPP
-- **Frontend:** Laravel Blade, HTML, and CSS
+The activity adds customer and user management forms, server-side
+validation, profile editing, and avatar uploads.
 
 ## Features
 
-### Customer Accounts
-- View the customer list.
-- Add a customer with a full name and valid email address.
-- Edit existing customer records.
-- Validate required fields before saving.
+-   User registration and login using Laravel Breeze.
+-   Customer management:
+    -   View customer records.
+    -   Create customers with a full name and valid email address.
+    -   Edit existing customer records.
+-   User management:
+    -   View user accounts.
+    -   Create user records with a username, full name, and email
+        address.
+    -   Edit existing user records.
+    -   Validate that usernames and email addresses are unique.
+-   Avatar upload:
+    -   Accept image uploads up to 2 MB.
+    -   Store uploaded files on Laravel's public storage disk.
+    -   Save the avatar file path in the database.
+-   Validation feedback for submitted forms.
 
-### User Accounts
-- View registered user profiles.
-- Create a user with a username, email address, and full name.
-- Require a unique username and email address.
-- Edit a user's username and full name.
-- Upload or replace a profile picture.
-- Validate uploaded images with a maximum file size of 2 MB.
-- Display the uploaded avatar on the User Accounts page, with a letter placeholder when no avatar is available.
-
+> **Activity requirement to verify:** The assignment also requires
+> creating a display-ready processed avatar/thumbnail using an
+> instructor-approved image package. Confirm that image processing has
+> been implemented before treating this requirement as complete. The
+> current basic upload implementation stores the uploaded image file.
 
 ## Requirements
 
-Install or prepare the following:
+Install the following before running the project:
 
-- PHP 8.2 or a compatible version supported by the installed Laravel release
-- Composer
-- MySQL
-- XAMPP (or another local PHP/MySQL environment)
-- A web browser
+-   PHP 8.2 or a compatible version required by the installed Laravel
+    version
+-   Composer
+-   MySQL or MariaDB
+-   Node.js and npm
+-   A web browser
 
-## Installation and Setup
+For a local Windows setup, XAMPP can provide PHP and MySQL.
 
-### 1. Clone or copy the project
+## Installation
 
-Place the project in your development folder. For example:
+### 1. Clone or download the project
 
-```bash
-cd C:\Users\kisha\Documents
+Clone the repository:
+
+``` bash
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
+Go into the project directory:
 
-If you already have the project folder, open that folder in VS Code.
+``` bash
+cd YOUR_PROJECT_FOLDER
+```
+
+If you downloaded the project as a ZIP file, extract it and open the
+extracted folder in your terminal.
 
 ### 2. Install PHP dependencies
 
-Open a terminal in the project directory and run:
-
-```bash
+``` bash
 composer install
 ```
 
-### 3. Configure the environment file
+### 3. Create the environment file
 
-Make a copy of `.env.example` and name the copy `.env` if the project does not already have an `.env` file.
+Copy `.env.example` and name the copy `.env`.
 
-Update the database and session settings in `.env`:
+On Windows PowerShell:
 
-```env
+``` powershell
+Copy-Item .env.example .env
+```
+
+Open `.env` and configure your database connection. Example:
+
+``` env
+APP_NAME="Laravel POS"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel_student_lab
+DB_DATABASE=
 DB_USERNAME=root
 DB_PASSWORD=
-
-SESSION_DRIVER=file
 ```
 
-Use the database username and password configured on your own computer. The example above assumes a local XAMPP MySQL installation using the `root` account with a blank password.
+Create the database in phpMyAdmin or your MySQL tool. Replace
+`YOUR_DATABASE_NAME` with the database name you created. Update the
+username and password if your MySQL setup uses different credentials.
 
-Do not upload your real `.env` file or database passwords to a public GitHub repository.
+### 4. Generate the application key
 
-### 4. Create the MySQL database
-
-1. Start **Apache** and **MySQL** in the XAMPP Control Panel.
-2. Open phpMyAdmin at `http://localhost/phpmyadmin`.
-3. Create a database named:
-
-```text
-laravel_student_lab
-```
-
-4. Make sure the database name in `.env` matches the database you created.
-
-### 5. Generate the application key
-
-Run:
-
-```bash
+``` bash
 php artisan key:generate
 ```
 
-If the project already has a valid application key, this command is normally not needed again.
+### 5. Run database migrations
 
-### 6. Clear cached configuration
-
-Run:
-
-```bash
-php artisan optimize:clear
-```
-
-### 7. Run database migrations
-
-Run:
-
-```bash
+``` bash
 php artisan migrate
 ```
 
-This creates the database tables from the migration files, including the users, customers, tasks, and Laravel support tables.
+This runs the project's pending migrations. **Do not use `migrate:fresh`
+on a database containing records you need to keep**, because it drops
+existing tables.
 
-To check the migration status, run:
+### 6. Create the public storage link
 
-```bash
-php artisan migrate:status
-```
+Avatar files are stored on Laravel's `public` disk. Run:
 
-**Important:** `php artisan migrate:fresh` drops all existing tables before recreating them. Do not use it if you need to keep existing database records.
-
-### 8. Create the public storage link
-
-Run:
-
-```bash
+``` bash
 php artisan storage:link
 ```
 
-This allows uploaded avatar images stored on Laravel's public disk to be displayed by the application. If Laravel reports that the link already exists, you do not need to create it again.
+This makes files stored under `storage/app/public` accessible through
+`public/storage`.
 
-### 9. Start the development server
+### 7. Install frontend dependencies and build assets
 
-Run:
+``` bash
+npm install
+npm run build
+```
 
-```bash
+### 8. Start the Laravel development server
+
+``` bash
 php artisan serve
 ```
 
-Open the application at:
+Open the URL shown in the terminal, usually:
 
-```text
+``` text
 http://127.0.0.1:8000
 ```
 
-## Main Application Pages
+Register or log in, then open the customer or user management pages.
 
-With the development server running, use these routes:
+## Main Routes
 
-| Page | URL |
-|---|---|
-| Customer Accounts | `http://127.0.0.1:8000/customers` |
-| Create Customer | `http://127.0.0.1:8000/customers/create` |
-| User Accounts | `http://127.0.0.1:8000/users` |
-| Create User | `http://127.0.0.1:8000/users/create` |
+The customer and user management routes are protected by authentication.
 
-## Project Structure
+  Page or action    Route
+  ----------------- ------------------------------
+  Customer list     `/customers`
+  Create customer   `/customers/create`
+  Edit customer     `/customers/{customer}/edit`
+  User accounts     `/users`
+  Create user       `/users/create`
+  Edit user         `/users/{user}/edit`
+  Login             `/login`
+  Register          `/register`
 
-Relevant project files and folders:
+## Validation Rules
 
-```text
-LaravelStudentLab/
-├── app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       ├── CustomerController.php
-│   │       └── UserController.php
-│   └── Models/
-│       ├── Customer.php
-│       └── User.php
-├── database/
-│   └── migrations/
-├── public/
-├── resources/
-│   └── views/
-│       ├── customers/
-│       └── users/
-├── routes/
-│   └── web.php
-├── storage/
-├── .env
-└── README.md
-```
+### Customers
 
-## Avatar Upload Details
+-   `full_name` is required.
+-   `email` is required and must be a valid email address.
 
-- The Create User form includes a profile picture file input.
-- The Edit User form can be used to replace an existing profile picture.
-- Uploaded files are stored on Laravel's `public` disk in the `avatars` directory.
-- The database stores the image path in the `avatar` column, not the image itself.
-- The current validation accepts image files up to 2 MB.
-- The public storage link is required for browser access to uploaded images.
+### Users
 
-## Troubleshooting
+-   `username` is required and must be unique.
+-   `full_name` is required.
+-   `email` is required, must be valid, and must be unique.
+-   `avatar` is optional, must be an image, and must not exceed 2 MB.
 
-### Laravel cannot connect to MySQL
+When editing a record, the unique validation rule ignores the current
+record so that the user can keep their existing username or email
+address.
 
-1. Make sure MySQL is running in XAMPP.
-2. Check `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` in `.env`.
-3. Run:
+## Avatar Storage
 
-```bash
-php artisan optimize:clear
-```
+Uploaded avatar files are stored in:
 
-4. Try the migration command again:
-
-```bash
-php artisan migrate
-```
-
-### A table does not exist
-
-Check the migration status:
-
-```bash
-php artisan migrate:status
-```
-
-If the required migration is pending, run:
-
-```bash
-php artisan migrate
-```
-
-### Uploaded avatars do not display
-
-Run:
-
-```bash
-php artisan storage:link
-```
-
-Then check that the uploaded file exists under:
-
-```text
+``` text
 storage/app/public/avatars
 ```
 
-Also confirm that the database `avatar` field contains the stored relative path.
+The database stores the relative file path in the `avatar` column,
+rather than storing the image itself.
 
-### Session table does not exist
+Make sure the `public/storage` symbolic link exists. If it does not,
+run:
 
-The project configuration uses file-based sessions:
-
-```env
-SESSION_DRIVER=file
+``` bash
+php artisan storage:link
 ```
 
-After changing `.env`, run:
+## Database and Submission
 
-```bash
-php artisan optimize:clear
-```
+The project uses Laravel migrations to create and update its database
+tables.
 
-## Database Backup for Submission
+For submission, include either:
 
-You can export the MySQL database through phpMyAdmin:
+-   A database export (for example, an SQL file), or
+-   The migrations and any seeders needed to recreate the database
+    structure and sample data.
 
-1. Open `http://localhost/phpmyadmin`.
-2. Select `laravel_student_lab`.
-3. Choose **Export**.
-4. Select **Quick** and **SQL**.
-5. Click **Export** to download the `.sql` file.
-
-Include the SQL export in your submission if required by your instructor. Alternatively, include the migration files and any required seeders.
+Do not include private credentials from your `.env` file in the public
+GitHub repository. Keep `.env` local and commit `.env.example` instead.
 
 
+
+## Developer
+**QUEJADA, RAINA KISHAN S.**
+
+Add your name and course/section here.
