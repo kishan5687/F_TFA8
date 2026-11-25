@@ -217,5 +217,3 @@ GitHub repository. Keep `.env` local and commit `.env.example` instead.
 
 ## Developer
 **QUEJADA, RAINA KISHAN S.**
-
-Add your name and course/section here.
