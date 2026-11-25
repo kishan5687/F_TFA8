@@ -1,6 +1,6 @@
 # Laravel POS -- TFA8 Activity
 
-A Laravel-based Point of Sale (POS) project extended for the TFA7
+A Laravel-based Point of Sale (POS) project extended for the TFA8
 activity: **Forms, Validation, and File Upload**.
 
 The activity adds customer and user management forms, server-side
